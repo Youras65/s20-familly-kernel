@@ -235,9 +235,9 @@ void hal_rx_proc_phyrx_other_receive_info_tlv_6490(void *rx_tlv_hdr,
  */
 static void hal_rx_dump_msdu_start_tlv_6490(void *msdustart, uint8_t dbg_level)
 {
-	struct rx_msdu_start *msdu_start = (struct rx_msdu_start *)msdustart;
+	/*struct rx_msdu_start *msdu_start = (struct rx_msdu_start *)msdustart;*/
 
-	__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
+	/*__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
 		       "rx_msdu_start tlv (1/2) - "
 		       "rxpcu_mpdu_filter_in_category: %x "
 		       "sw_frame_group_id: %x "
@@ -294,12 +294,12 @@ static void hal_rx_dump_msdu_start_tlv_6490(void *msdustart, uint8_t dbg_level)
 		       msdu_start->rate_mcs,
 		       msdu_start->receive_bandwidth,
 		       msdu_start->reception_type,
-		       msdu_start->ppdu_start_timestamp);
+		       msdu_start->ppdu_start_timestamp); */
 
-	__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
+	/* __QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
 		       "rx_msdu_start tlv (2/2) - "
 		       "sw_phy_meta_data: %x ",
-		       msdu_start->sw_phy_meta_data);
+		       msdu_start->sw_phy_meta_data); */
 }
 
 /**
@@ -313,9 +313,9 @@ static void hal_rx_dump_msdu_start_tlv_6490(void *msdustart, uint8_t dbg_level)
 static void hal_rx_dump_msdu_end_tlv_6490(void *msduend,
 					  uint8_t dbg_level)
 {
-	struct rx_msdu_end *msdu_end = (struct rx_msdu_end *)msduend;
+	/*struct rx_msdu_end *msdu_end = (struct rx_msdu_end *)msduend;*/
 
-	__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
+	/*__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
 		       "rx_msdu_end tlv (1/3) - "
 		       "rxpcu_mpdu_filter_in_category: %x "
 		       "sw_frame_group_id: %x "
@@ -360,9 +360,9 @@ static void hal_rx_dump_msdu_end_tlv_6490(void *msduend,
 		       msdu_end->flow_idx_timeout,
 		       msdu_end->flow_idx_invalid,
 		       msdu_end->wifi_parser_error,
-		       msdu_end->amsdu_parser_error);
+		       msdu_end->amsdu_parser_error); */
 
-	__QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
+	/* __QDF_TRACE_RL(dbg_level, QDF_MODULE_ID_DP,
 		       "rx_msdu_end tlv (2/3)- "
 		       "sa_is_valid: %x "
 		       "da_is_valid: %x "
@@ -423,7 +423,7 @@ static void hal_rx_dump_msdu_end_tlv_6490(void *msduend,
 		       msdu_end->flow_aggregation_continuation,
 		       msdu_end->fisa_timeout,
 		       msdu_end->cumulative_l4_checksum,
-		       msdu_end->cumulative_ip_length);
+		       msdu_end->cumulative_ip_length); */
 }
 
 /*

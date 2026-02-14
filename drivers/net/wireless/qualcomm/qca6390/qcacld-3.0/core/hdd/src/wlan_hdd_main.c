@@ -3731,9 +3731,9 @@ void hdd_sysfs_update_driver_status(int32_t status)
 			"yes");
 		hdd_info("%s", version);
 		hdd_info("%s", softap);
-		cnss_sysfs_update_driver_status(status, version, softap);
+		//hdd_sysfs_update_driver_status(status, version, softap);
 	} else {
-		cnss_sysfs_update_driver_status(status, NULL, NULL);
+		//hdd_sysfs_update_driver_status(status, NULL, NULL);
 	}
 }
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
@@ -9112,7 +9112,7 @@ static inline void hdd_pm_qos_update_cpu_mask(cpumask_t *mask,
 #ifdef MSM_PLATFORM
 #define COPY_CPU_MASK(a, b) cpumask_copy(a, b)
 #define DUMP_CPU_AFFINE() hdd_info("Set cpu_mask %*pb for affine_cores", \
-			cpumask_pr_args(&hdd_ctx->pm_qos_req.cpus_affine))
+			cpumask_pr_args((struct cpumask *)&hdd_ctx->pm_qos_req.cpus_affine))
 #else
 #define COPY_CPU_MASK(a, b) /* no-op*/
 #define DUMP_CPU_AFFINE() /* no-op*/
@@ -9128,7 +9128,7 @@ static inline void hdd_pm_qos_update_cpu_mask(cpumask_t *mask,
 static inline void hdd_pm_qos_update_request(struct hdd_context *hdd_ctx,
 					     cpumask_t *pm_qos_cpu_mask)
 {
-	COPY_CPU_MASK(&hdd_ctx->pm_qos_req.cpus_affine, pm_qos_cpu_mask);
+	COPY_CPU_MASK((struct cpumask *)&hdd_ctx->pm_qos_req.cpus_affine, pm_qos_cpu_mask);
 
 	/* Latency value to be read from INI */
 	if (cpumask_empty(pm_qos_cpu_mask))
@@ -9148,8 +9148,8 @@ static inline void hdd_pm_qos_update_request(struct hdd_context *hdd_ctx,
 static inline void hdd_update_pm_qos_affine_cores(struct hdd_context *hdd_ctx)
 {
 	hdd_ctx->pm_qos_req.type = PM_QOS_REQ_AFFINE_CORES;
-	qdf_cpumask_clear(&hdd_ctx->pm_qos_req.cpus_affine);
-	hdd_pm_qos_update_cpu_mask(&hdd_ctx->pm_qos_req.cpus_affine, false);
+	qdf_cpumask_clear((qdf_cpu_mask *)&hdd_ctx->pm_qos_req.cpus_affine);
+	hdd_pm_qos_update_cpu_mask((cpumask_t *)&hdd_ctx->pm_qos_req.cpus_affine, false);
 }
 #else
 static inline void hdd_update_pm_qos_affine_cores(struct hdd_context *hdd_ctx)
@@ -9163,7 +9163,7 @@ static inline void hdd_pm_qos_add_request(struct hdd_context *hdd_ctx)
 			   PM_QOS_DEFAULT_VALUE);
 	DUMP_CPU_AFFINE();
 	hdd_info("Set cpu_mask %*pb for affine_cores",
-		 cpumask_pr_args(&hdd_ctx->pm_qos_req.cpus_affine));
+		 cpumask_pr_args((struct cpumask *)&hdd_ctx->pm_qos_req.cpus_affine));
 }
 
 static inline void hdd_pm_qos_remove_request(struct hdd_context *hdd_ctx)
@@ -16261,11 +16261,11 @@ static void hdd_driver_unload(void)
 }
 
 #if defined (SEC_CONFIG_PSM_SYSFS)
-int wlan_hdd_sec_get_psm()
+int wlan_hdd_sec_get_psm(void)
 {
 	int psm = 0;
 
-	psm = cnss_sysfs_get_pm_info();
+	//psm = cnss_sysfs_get_pm_info();
 //	hdd_info("psm %d", psm);
 
 	return psm;
