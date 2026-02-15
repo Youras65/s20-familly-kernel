@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=-YacineKernel 
+kernel.string=-Aemeath 
 do.devicecheck=1
 do.modules=0
 do.systemless=1
@@ -13,6 +13,7 @@ do.cleanuponabort=0
 device.name1=z3q
 device.name2=x1qxx
 device.name3=y2q
+device.name4=f2q
 supported.versions=11 - 15
 supported.patchlevels=
 '; } # end properties
